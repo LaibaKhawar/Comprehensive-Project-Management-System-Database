@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .container h1 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    form p {
+      margin: 0;
+      margin-bottom: 5px;
+    }
+
+    form input,
+    form button {
+      padding: 10px;
+      border: 1px solid #dddfe2;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    form button {
+      margin-top: 10px;
+      background-color: #1877f2;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #0d63ac;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to the home page!</h1>
+    <ul>
+      <% if (isAdmin) { %>
+        <li>
+          <h2>Admin</h2>
+          <!-- Add User Form -->
+          <h2>Add User</h2>
+          <form action="/users/add" method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="text" name="usertype" placeholder="User Type" required>
+            <input type="text" name="fname" placeholder="First Name" required>
+            <input type="text" name="lname" placeholder="Last Name" required>
+            <input type="number" name="age" placeholder="Age" required>
+            <button type="submit">Add User</button>
+          </form>
+        </li>
+        <li>
+          <!-- Delete User Form -->
+          <h2>Delete User</h2>
+          <form action="/users/delete" method="POST">
+            <input type="text" name="userid" placeholder="User ID" required>
+            <input type="text" name="usertype" placeholder="User Type" required>
+            <button type="submit">Delete User</button>
+          </form>
+        </li>
+        <li>
+          <!-- Update User Form -->
+          <h2>Update User</h2>
+          <form action="/users/update" method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="text" name="usertype" placeholder="User Type" required>
+            <input type="text" name="fname" placeholder="First Name" required>
+            <input type="text" name="lname" placeholder="Last Name" required>
+            <input type="text" name="userid" placeholder="User ID" required>
+            <button type="submit">Update User</button>
+          </form>
+        </li>
+      <% } %>
+
+      <% if (iscus) { %>
+        <li>
+          <h2>Customer</h2>
+          <form action="/users/showissue/" method="get">
+            <p>TO SHOW ALL THE ISSUES</p>
+            <button type="submit">SHOW</button>
+          </form>
+        </li>
+        <li>
+          <h2>Add Project</h2>
+          <form action="/users/addproject" method="POST">
+            <input type="text" name="report" placeholder="Report" required>
+            <input type="text" name="projid" placeholder="Project ID" required>
+            <input type="text" name="sprintid" placeholder="Sprint ID" required>
+            <input type="text" name="issueid" placeholder="Issue ID" required>
+            <input type="text" name="version" placeholder="Version" required>
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="text" name="pmid" placeholder="PM ID" required>
+            <button type="submit">Add</button>
+          </form>
+        </li>
+      <% } %>
+
+      <% if (istm) { %>
+        <li>
+          <h2>Team Member</h2>
+          <form action="/users/showissueteam/" method="get">
+            <p>TO SHOW ALL THE ISSUES</p>
+            <button type="submit">SHOW</button>
+          </form>
+        </li>
+        <li>
+          <form action="/users/showprojectteam/" method="get">
+            <h3>TO SHOW ALL THE PROJECTS LINKED TO YOU</h3>
+            <button type="submit">SHOW</button>
+          </form>
+        </li>
+      <% } %>
+
+      <% if (ispm) { %>
+        <li>
+
+          <form action="/users/showproject/" method="get">
+            <h3>TO SHOW ALL THE PROJECTS</h3>
+            <button type="submit">SHOW</button>
+          </form>
+        </li>
+        <li>
+          <h3>Delete Project</h3>
+          <form action="/users/projectdelete" method="POST">
+            <input type="text" name="projectid" placeholder="Project ID" required>
+            <button type="submit">Delete Project</button>
+          </form>
+        </li>
+        <li>
+          <h3>Update Project Version</h3>
+          <form action="/users/updateproject" method="POST">
+            <input type="text" name="projid" placeholder="Project ID" required>
+            <input type="text" name="version" placeholder="Version" required>
+            <button type="submit">Update</button>
+          </form>
+        </li>
+      <% } %>
+    </ul>
+  </div>
+</body>
+</html>
