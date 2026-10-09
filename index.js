@@ -4,7 +4,7 @@ var app = express();
 var connection = require('./database');
 const session = require('express-session');
 app.use(session({
-  secret: 'shammaz',
+  secret: process.env.SESSION_SECRET || require('crypto').randomBytes(32).toString('hex'),
   resave: false,
   saveUninitialized: true
 }));
